@@ -1,0 +1,23 @@
+int buttonPin = 2;       // Pin where push button is connected
+int buttonState = 0;     // Current button state
+int lastButtonState = 0; // Previous button state
+int counter = 0;         // Counter variable
+
+void setup() {
+  pinMode(buttonPin, INPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+  buttonState = digitalRead(buttonPin);
+
+  // Check if button state has changed from LOW to HIGH (pressed)
+  if (buttonState == HIGH && lastButtonState == LOW) {
+    counter++; // Increase count
+    Serial.print("Button Pressed: ");
+    Serial.println(counter);
+    delay(200); // Debounce delay
+  }
+
+  lastButtonState = buttonState;
+}
